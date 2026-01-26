@@ -1,0 +1,102 @@
+// data/hackathons.ts
+
+import { Hackathon } from "../types";
+
+export const hackathonData: Hackathon[] = [
+  {
+    id: 1,
+    title: "AI Innovation Challenge",
+    description: "Build AI solutions with machine learning and neural networks.",
+    status: "upcoming",
+    difficulty: "advanced",
+    themes: ["AI", "Machine Learning", "Computer Vision"],
+    organizer: "TechCorp AI",
+    prize: 50000,
+    participants: 2500,
+    duration: "48 Hours",
+    registrationDeadline: "2024-06-15",
+    startDate: "2024-06-20",
+    endDate: "2024-06-22",
+    technologies: ["Python", "TensorFlow", "PyTorch"]
+  },
+  {
+    id: 2,
+    title: "Web3 Development Hackathon",
+    description: "Create decentralized applications on blockchain.",
+    status: "ongoing",
+    difficulty: "intermediate",
+    themes: ["Blockchain", "DeFi", "Web3"],
+    organizer: "Crypto Labs",
+    prize: 30000,
+    participants: 1800,
+    duration: "72 Hours",
+    registrationDeadline: "2024-05-10",
+    startDate: "2024-05-12",
+    endDate: "2024-05-15",
+    technologies: ["Solidity", "Ethereum", "Web3.js"]
+  },
+  {
+    id: 3,
+    title: "Sustainable Tech Hack",
+    description: "Develop solutions for environmental sustainability.",
+    status: "completed",
+    difficulty: "beginner",
+    themes: ["Sustainability", "Clean Energy"],
+    organizer: "Green Future",
+    prize: 20000,
+    participants: 3200,
+    duration: "36 Hours",
+    registrationDeadline: "2024-04-01",
+    startDate: "2024-04-05",
+    endDate: "2024-04-07",
+    technologies: ["IoT", "Python", "React Native"]
+  },
+  {
+    id: 4,
+    title: "FinTech Innovation",
+    description: "Build the future of financial technology.",
+    status: "upcoming",
+    difficulty: "intermediate",
+    themes: ["Finance", "Banking", "Payments"],
+    organizer: "FinanceTech",
+    prize: 40000,
+    participants: 1500,
+    duration: "48 Hours",
+    registrationDeadline: "2024-07-01",
+    startDate: "2024-07-10",
+    endDate: "2024-07-12",
+    technologies: ["Java", "React", "Node.js"]
+  },
+  {
+    id: 5,
+    title: "HealthTech Solutions",
+    description: "Innovate in healthcare technology and medical devices.",
+    status: "ongoing",
+    difficulty: "advanced",
+    themes: ["Healthcare", "Medical", "Biotech"],
+    organizer: "Health Innovations",
+    prize: 60000,
+    participants: 2100,
+    duration: "60 Hours",
+    registrationDeadline: "2024-05-05",
+    startDate: "2024-05-08",
+    endDate: "2024-05-11",
+    technologies: ["Python", "Django", "React"]
+  },
+  {
+    id: 6,
+    title: "EdTech Hackathon",
+    description: "Create innovative educational technology solutions.",
+    status: "completed",
+    difficulty: "beginner",
+    themes: ["Education", "E-learning", "EdTech"],
+    organizer: "LearnTech",
+    prize: 25000,
+    participants: 2800,
+    duration: "48 Hours",
+    registrationDeadline: "2024-03-15",
+    startDate: "2024-03-20",
+    endDate: "2024-03-22",
+    technologies: ["JavaScript", "Vue.js", "Firebase"]
+  }
+];

@@ -3,37 +3,41 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { NavLink } from "../types";
+import {navigationData} from "../data/navigation"
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [featureOpen, setFeatureOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [particles, setParticles] = useState<
     { top: string; left: string; delay: number; duration: number }[]
   >([]);
+  const [navLinks, setNavLinks] = useState<NavLink[]>([]);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    setNavLinks(navigationData.navLinks as NavLink[]);
+    
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle mobile menu close on resize
   useEffect(() => {
-    setParticles(
-      Array.from({ length: 5 }).map(() => ({
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        delay: Math.random() * 2,
-        duration: 2 + Math.random(),
-      }))
-    );
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setOpen(false);
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  const navLinks = ["Home", "Hackathons", "About", "Contact Us"];
-  const featureItems = ["Spaces", "Sponsors", "Vendors", "Team Guidance"];
 
   return (
     <motion.header
@@ -85,184 +89,182 @@ const Navbar = () => {
       <nav className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo with animation */}
-          <motion.div
-            className="flex items-center space-x-3 group cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <Link href="/">
             <motion.div
-              className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
-              style={{
-                // Replaced vars with #06b6d4 (primary) and #0891b2 (hover)
-                background: "linear-gradient(135deg, #06b6d4, #0891b2)",
-                // Replaced var(--primary-glow) with rgba(6, 182, 212, 0.35)
-                boxShadow: "0 0 20px rgba(6, 182, 212, 0.35)",
-              }}
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 4, repeat: Infinity, repeatDelay: 2 }}
+              className="flex items-center space-x-3 group cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <motion.span
-                className="text-white font-bold text-lg"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                F
-              </motion.span>
-            </motion.div>
-
-            <motion.div
-              className="text-2xl font-bold relative"
-              style={{
-                // Replaced vars with #06b6d4 and #0891b2
-                background: "linear-gradient(90deg, #06b6d4, #0891b2)",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
-              }}
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              FORX
-              <motion.span
-                // Replaced var(--primary) with #06b6d4
-                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#06b6d4] to-transparent"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.div>
-          </motion.div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
-            {navLinks.map((link, index) => (
               <motion.div
-                key={link}
-                className="relative"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                onMouseEnter={() => setHoveredLink(link)}
-                onMouseLeave={() => setHoveredLink(null)}
+                className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
+                style={{
+                  // Replaced vars with #06b6d4 (primary) and #0891b2 (hover)
+                  background: "linear-gradient(135deg, #06b6d4, #0891b2)",
+                  // Replaced var(--primary-glow) with rgba(6, 182, 212, 0.35)
+                  boxShadow: "0 0 20px rgba(6, 182, 212, 0.35)",
+                }}
+                animate={{ rotate: [0, 5, -5, 0] }}
+                transition={{ duration: 4, repeat: Infinity, repeatDelay: 2 }}
               >
-                <Link href="#" className="nav-link px-4 py-2 rounded-lg">
-                  {link}
-                  {hoveredLink === link && (
-                    <motion.div
-                      className="absolute inset-0 rounded-lg -z-10"
-                      style={{
-                        // Replaced var(--primary-soft) with rgba(6, 182, 212, 0.15)
-                        background: "rgba(6, 182, 212, 0.15)",
-                        opacity: 0.1,
-                      }}
-                      layoutId="hover-bg"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.1 }}
-                      exit={{ opacity: 0 }}
-                    />
-                  )}
-                </Link>
-                <motion.div
-                  className="absolute -bottom-1 left-1/2 h-0.5"
-                  style={{
-                    // Replaced var(--primary) with #06b6d4
-                    background: "linear-gradient(90deg, transparent, #06b6d4, transparent)",
-                    width: "0%",
-                  }}
-                  animate={{
-                    width: hoveredLink === link ? "80%" : "0%",
-                    x: "-50%",
-                  }}
+                <motion.span
+                  className="text-white font-bold text-lg"
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  F
+                </motion.span>
+              </motion.div>
+
+              <motion.div
+                className="text-2xl font-bold relative"
+                style={{
+                  // Replaced vars with #06b6d4 and #0891b2
+                  background: "linear-gradient(90deg, #06b6d4, #0891b2)",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
+                }}
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                FORX
+                <motion.span
+                  // Replaced var(--primary) with #06b6d4
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#06b6d4] to-transparent"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.3 }}
                 />
               </motion.div>
-            ))}
+            </motion.div>
+          </Link>
 
-            {/* Features Dropdown */}
-            <motion.div
-              className="relative"
-              onMouseEnter={() => setFeatureOpen(true)}
-              onMouseLeave={() => setFeatureOpen(false)}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navLinks.length * 0.1 }}
-            >
-              <motion.button
-                className="nav-link flex items-center gap-1 px-4 py-2 rounded-lg"
-                whileHover={{ scale: 1.05 }}
-              >
-                Features
-                <motion.span
-                  animate={{ rotate: featureOpen ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  ⌄
-                </motion.span>
-              </motion.button>
-
-              <AnimatePresence>
-                {featureOpen && (
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navLinks.map((item, index) => (
+              <div key={item.label} className="relative">
+                {item.type === 'link' ? (
                   <motion.div
-                    // Replaced var(--border-soft)
-                    className="absolute top-full mt-3 w-56 rounded-xl bg-black/90 border border-[rgba(255,255,255,0.1)] shadow-2xl backdrop-blur-xl overflow-hidden"
-                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    onMouseEnter={() => setHoveredLink(item.label)}
+                    onMouseLeave={() => setHoveredLink(null)}
                   >
-                    <div className="py-3">
-                      {featureItems.map((item, index) => (
+                    <Link 
+                      href={item.href} 
+                      className="nav-link px-4 py-2 rounded-lg text-gray-300 hover:text-white transition-colors duration-200"
+                    >
+                      {item.label}
+                      {hoveredLink === item.label && (
                         <motion.div
-                          key={item}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <Link
-                            href="/spaces"
-                            className="block px-5 py-2 text-sm transition-all group"
-                            style={{ color: "#ededed" }} // Replaced var(--foreground) with standard light text
-                          >
-                            <motion.span
-                              // Replaced var(--primary) with #06b6d4 in tailwind arbitrary value
-                              className="group-hover:text-[#06b6d4] relative"
-                              whileHover={{ x: 5 }}
-                            >
-                              {item}
-                              <motion.span
-                                // Replaced var(--primary) with #06b6d4 in tailwind arbitrary value
-                                className="absolute -left-2 top-1/2 h-1 w-1 rounded-full bg-[#06b6d4]"
-                                initial={{ opacity: 0, scale: 0 }}
-                                whileHover={{ opacity: 1, scale: 1 }}
-                              />
-                            </motion.span>
-                          </Link>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    {/* Dropdown glow effect */}
+                          className="absolute inset-0 rounded-lg -z-10"
+                          style={{
+                            background: "rgba(6, 182, 212, 0.1)",
+                          }}
+                          layoutId="hover-bg"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                        />
+                      )}
+                    </Link>
                     <motion.div
-                      className="absolute inset-0 -z-10"
-
-                      
+                      className="absolute -bottom-1 left-1/2 h-0.5"
                       style={{
-                        // Replaced var(--primary-glow) with rgba(6, 182, 212, 0.35)
-                        background: "radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.35), transparent 70%)",
-                        opacity: 0.1,
+                        background: "linear-gradient(90deg, transparent, #06b6d4, transparent)",
+                        width: "0%",
                       }}
-                      animate={{ opacity: [0.05, 0.1, 0.05] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                      animate={{
+                        width: hoveredLink === item.label ? "80%" : "0%",
+                        x: "-50%",
+                      }}
+                      transition={{ duration: 0.3 }}
                     />
+                  </motion.div>
+                ) : (
+                  // Features Dropdown
+                  <motion.div
+                    className="relative"
+                    onMouseEnter={() => setFeatureOpen(true)}
+                    onMouseLeave={() => setFeatureOpen(false)}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <motion.button 
+                      className="nav-link flex items-center gap-1 px-4 py-2 rounded-lg text-gray-300 hover:text-white transition-colors duration-200"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {item.label}
+                      <motion.span
+                        animate={{ rotate: featureOpen ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-sm"
+                      >
+                        ⌄
+                      </motion.span>
+                    </motion.button>
 
-
-                    
+                    <AnimatePresence>
+                      {featureOpen && item.dropdownItems && (
+                        <motion.div
+                          className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 rounded-xl bg-gray-900/95 backdrop-blur-xl border border-gray-800 shadow-2xl overflow-hidden"
+                          initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                          transition={{ duration: 0.2 }}
+                          onMouseEnter={() => setFeatureOpen(true)}
+                          onMouseLeave={() => setFeatureOpen(false)}
+                        >
+                          <div className="py-3">
+                            <div className="px-4 py-2 mb-2">
+                              <h3 className="text-sm font-semibold text-gray-400">FEATURES</h3>
+                            </div>
+                            {item.dropdownItems.map((dropdownItem, idx) => (
+                              <motion.div
+                                key={dropdownItem.label}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: idx * 0.05 }}
+                              >
+                                <Link
+                                  href={dropdownItem.href}
+                                  className="flex items-center gap-3 px-4 py-3 text-sm transition-all hover:bg-gray-800/50 group"
+                                  onClick={() => setFeatureOpen(false)}
+                                >
+                                  <span className="text-lg">{dropdownItem.icon}</span>
+                                  <div className="flex-1">
+                                    <div className="font-medium text-white group-hover:text-cyan-400 transition-colors">
+                                      {dropdownItem.label}
+                                    </div>
+                                    {dropdownItem.description && (
+                                      <div className="text-xs text-gray-400 mt-0.5">
+                                        {dropdownItem.description}
+                                      </div>
+                                    )}
+                                  </div>
+                                  <motion.span
+                                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                                    initial={{ x: -5 }}
+                                    whileHover={{ x: 0 }}
+                                  >
+                                    →
+                                  </motion.span>
+                                </Link>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
                 )}
-              </AnimatePresence>
-            </motion.div>
+              </div>
+            ))}
           </div>
+
 
           {/* Right Side */}
           <div className="flex items-center space-x-4">
