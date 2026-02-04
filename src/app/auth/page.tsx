@@ -116,7 +116,7 @@ export default function Auth() {
           <div className="relative h-full w-full">
             <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-slate-900/60 to-slate-900/90 z-10" />
             <img 
-              src="/img1.png" 
+              src="/img1.jpg" 
               alt="Innovation Background"
               className="w-full h-full object-cover"
             />
