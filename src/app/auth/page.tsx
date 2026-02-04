@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -22,6 +22,25 @@ import {
 type AuthMode = "login" | "signup";
 type UserRole = "user" | "organizer";
 
+// --- NEW HELPER COMPONENT ---
+// This component's only job is to read the URL and update state.
+// It will be wrapped in Suspense.
+function AuthParamsHandler({ setMode }: { setMode: (mode: AuthMode) => void }) {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const modeParam = searchParams.get("mode");
+    if (modeParam === "signup") {
+      setMode("signup");
+    } else if (modeParam === "login") {
+      setMode("login");
+    }
+  }, [searchParams, setMode]);
+
+  return null; // This component doesn't render anything visually
+}
+// ---------------------------
+
 export default function Auth() {
   const [mode, setMode] = useState<AuthMode>("login");
   const [role, setRole] = useState<UserRole>("user");
@@ -30,17 +49,8 @@ export default function Auth() {
 
   const { toast } = useToast();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  // Handle URL parameters (e.g. /auth?mode=signup)
-  useEffect(() => {
-    const modeParam = searchParams.get("mode");
-    if (modeParam === "signup") {
-      setMode("signup");
-    } else if (modeParam === "login") {
-      setMode("login");
-    }
-  }, [searchParams]);
+  // NOTE: useSearchParams moved out of main component to AuthParamsHandler
 
   const [formData, setFormData] = useState({
     name: "",
@@ -88,6 +98,13 @@ export default function Auth() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 pt-20 bg-slate-50 font-sans selection:bg-primary/20 selection:text-primary">
       
+      {/* --- ADDED SUSPENSE BOUNDARY HERE --- */}
+      {/* We wrap the handler in suspense. fallback={null} means nothing shows while loading params */}
+      <Suspense fallback={null}>
+        <AuthParamsHandler setMode={setMode} />
+      </Suspense>
+      {/* ---------------------------------- */}
+
       {/* Main Card Container */}
       <div className="w-full max-w-[1000px] bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row min-h-[600px]">
         
