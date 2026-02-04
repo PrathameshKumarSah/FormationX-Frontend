@@ -1,4 +1,3 @@
-// app/components/Footer.tsx
 "use client";
 
 import Link from "next/link";
@@ -54,7 +53,11 @@ const Footer = () => {
 
   return (
     <motion.footer 
-      className="relative bg-black border-t border-white/5 overflow-hidden"
+      className="relative border-t overflow-hidden"
+      style={{
+          backgroundColor: "hsl(var(--background))",
+          borderColor: "hsl(var(--border))"
+      }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -87,7 +90,8 @@ const Footer = () => {
             </Link>
 
             <motion.p 
-              className="text-gray-400 text-sm mb-6 max-w-xs leading-relaxed"
+              className="text-sm mb-6 max-w-xs leading-relaxed"
+              style={{ color: "hsl(var(--muted-foreground))" }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
@@ -174,14 +178,16 @@ const Footer = () => {
 
         {/* Bottom */}
         <motion.div 
-          className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4"
+          className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4"
+          style={{ borderColor: "hsl(var(--border) / 0.5)" }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
           viewport={{ once: true }}
         >
           <motion.p 
-            className="text-gray-500 text-sm"
+            className="text-sm"
+            style={{ color: "hsl(var(--muted-foreground))" }}
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
@@ -189,7 +195,8 @@ const Footer = () => {
           </motion.p>
           
           <motion.p 
-            className="text-gray-500 text-sm flex items-center"
+            className="text-sm flex items-center"
+            style={{ color: "hsl(var(--muted-foreground))" }}
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
@@ -202,7 +209,8 @@ const Footer = () => {
 
       {/* Additional floating elements */}
       <motion.div
-        className="absolute bottom-10 left-1/4 w-2 h-2 rounded-full bg-cyan-400/30"
+        className="absolute bottom-10 left-1/4 w-2 h-2 rounded-full"
+        style={{ backgroundColor: "hsl(var(--primary) / 0.3)" }}
         animate={{
           y: [0, -10, 0],
           opacity: [0.3, 0.8, 0.3],
@@ -214,7 +222,8 @@ const Footer = () => {
         }}
       />
       <motion.div
-        className="absolute top-10 right-1/4 w-3 h-3 rounded-full bg-purple-400/30"
+        className="absolute top-10 right-1/4 w-3 h-3 rounded-full"
+        style={{ backgroundColor: "hsl(var(--secondary) / 0.3)" }}
         animate={{
           y: [0, 10, 0],
           opacity: [0.3, 0.8, 0.3],

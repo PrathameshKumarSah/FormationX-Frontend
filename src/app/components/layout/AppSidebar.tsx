@@ -112,7 +112,7 @@ export function AppSidebar() {
                 )}
                 onClick={() => setIsMobileOpen(false)}
               >
-                <span className="flex-shrink-0">{item.icon}</span>
+                <span className="shrink-0">{item.icon}</span>
                 {!isCollapsed && (
                   <span className="font-medium truncate">{item.label}</span>
                 )}

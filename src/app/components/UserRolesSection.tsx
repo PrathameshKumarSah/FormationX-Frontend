@@ -1,4 +1,3 @@
-// app/components/UserRolesSection.tsx
 "use client";
 
 import React from "react";
@@ -17,7 +16,7 @@ import {
   AnimatedRoleCard,
   AnimatedRolesHeader,
   EcosystemConnections,
-  FloatingRoleIndicators
+  FloatingRoleIndicators,
 } from "./ui/user-roles-enhancements";
 
 const roles = [
@@ -61,34 +60,21 @@ const roles = [
 
 const UserRolesSection = () => {
   return (
-    <motion.section 
+    <section
       id="for-everyone"
-      className="relative py-16 md:py-16 bg-black overflow-hidden"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
+      className="relative py-16 overflow-hidden"
+      // Dynamic Background Color
+      style={{ backgroundColor: "hsl(var(--background))" }}
     >
-      {/* Enhanced Background glow */}
-      <div className="absolute inset-0">
-        <AnimatedEcosystemGlow />
-      </div>
-
-      {/* Floating ecosystem icons */}
+      <AnimatedEcosystemGlow />
       <FloatingEcosystemIcons />
-      
-      {/* Ecosystem connection lines */}
       <EcosystemConnections />
-      
-      {/* Floating role indicators */}
       <FloatingRoleIndicators />
 
       <div className="relative container mx-auto px-4">
-        {/* Enhanced Header */}
         <AnimatedRolesHeader />
 
-        {/* Enhanced Roles Grid with Staggered Animation */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -106,59 +92,7 @@ const UserRolesSection = () => {
           ))}
         </motion.div>
       </div>
-
-      {/* Additional floating elements for premium feel */}
-      <motion.div
-        className="absolute top-10 left-5 w-2 h-2 rounded-full bg-cyan-400/30"
-        animate={{
-          y: [0, -15, 0],
-          opacity: [0.3, 0.8, 0.3],
-          scale: [1, 1.5, 1],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute bottom-10 right-5 w-3 h-3 rounded-full bg-purple-400/30"
-        animate={{
-          y: [0, 15, 0],
-          opacity: [0.3, 0.8, 0.3],
-          scale: [1, 1.8, 1],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      />
-      
-      {/* Center floating element */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-cyan-500/20"
-        animate={{
-          scale: [1, 2, 1],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* Animated border glow */}
-      <motion.div
-        className="absolute inset-0 border border-transparent pointer-events-none"
-        animate={{
-          borderColor: ["rgba(6, 182, 212, 0.05)", "rgba(6, 182, 212, 0.1)", "rgba(6, 182, 212, 0.05)"],
-        }}
-        transition={{ duration: 3, repeat: Infinity }}
-      />
-    </motion.section>
+    </section>
   );
 };
 

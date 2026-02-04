@@ -10,7 +10,8 @@ import {
   HelpCircle,
   Store,
 } from "lucide-react";
-import { motion } from "framer-motion";
+// Removed unused motion import since it's not directly used in this file
+// (It's used inside the imported components)
 import {
   TechParticles,
   AnimatedProblemCard,
@@ -66,7 +67,11 @@ const problems = [
 
 const ProblemsSection = () => {
   return (
-    <section className="relative py-24 bg-black overflow-hidden">
+    // Changed bg-black to bg-[var(--background)]
+    <section 
+      className="relative py-24 overflow-hidden"
+      style={{ backgroundColor: "hsl(var(--background))" }}
+    >
       {/* Background glow */}
       <AnimatedGlowOrb />
       
@@ -93,8 +98,11 @@ const ProblemsSection = () => {
 
       </div>
       
-      {/* Very subtle bottom border to separate sections */}
-      <div className="absolute bottom-0 left-0 w-full h-px bg-white/5" />
+      {/* Divider: Changed bg-white/5 to var(--border) */}
+      <div 
+        className="absolute bottom-0 left-0 w-full h-px" 
+        style={{ backgroundColor: "hsl(var(--border) / 0.5)" }}
+      />
     </section>
   );
 };

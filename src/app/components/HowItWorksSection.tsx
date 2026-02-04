@@ -1,16 +1,14 @@
-// app/components/HowItWorksSection.tsx
 "use client";
 
 import React from "react";
-import { CheckCircle2 } from "lucide-react";
-import { motion } from "framer-motion";
+// Removed unused motion import
 import {
   AnimatedTimelineConnector,
   FloatingTechIcons,
   AnimatedStepCard,
   AnimatedSectionHeader,
   AnimatedBackgroundGlow,
-  ConnectionDotsAnimation
+  ConnectionDotsAnimation,
 } from "./ui/how-it-works-enhancements";
 
 const steps = [
@@ -60,34 +58,28 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <motion.section 
-      className="relative py-16 md:py-16 bg-black overflow-hidden"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
+    <section 
+        className="relative py-16 overflow-hidden"
+        style={{ backgroundColor: "hsl(var(--background))" }}
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-gray-900" />
-      
-      {/* Enhanced animated background glow */}
+      {/* Dynamic Background Gradient: Background -> Card */}
+      <div 
+        className="absolute inset-0" 
+        style={{
+            background: `linear-gradient(to bottom, hsl(var(--background)), hsl(var(--background)), hsl(var(--card)))`
+        }}
+      />
+
       <AnimatedBackgroundGlow />
-      
-      {/* Floating tech icons */}
       <FloatingTechIcons />
-      
-      {/* Connection dots animation */}
       <ConnectionDotsAnimation />
 
       <div className="relative container mx-auto px-4">
-        {/* Enhanced Header */}
         <AnimatedSectionHeader />
 
         <div className="relative max-w-5xl mx-auto">
-          {/* Enhanced Timeline Connector */}
           <AnimatedTimelineConnector />
 
-          {/* Enhanced Steps with Animation */}
           <div className="relative">
             {steps.map((step, index) => (
               <AnimatedStepCard
@@ -101,44 +93,9 @@ const HowItWorksSection = () => {
         </div>
       </div>
 
-      {/* Additional floating elements */}
-      <motion.div
-        className="absolute top-20 left-10 w-3 h-3 rounded-full bg-cyan-400/30"
-        animate={{
-          y: [0, -20, 0],
-          opacity: [0.3, 0.8, 0.3],
-          scale: [1, 1.5, 1],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-10 w-4 h-4 rounded-full bg-purple-400/30"
-        animate={{
-          y: [0, 20, 0],
-          opacity: [0.3, 0.8, 0.3],
-          scale: [1, 1.8, 1],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      />
-
-      {/* Animated border glow */}
-      <motion.div
-        className="absolute inset-0 border border-transparent pointer-events-none"
-        animate={{
-          borderColor: ["rgba(6, 182, 212, 0.05)", "rgba(6, 182, 212, 0.1)", "rgba(6, 182, 212, 0.05)"],
-        }}
-        transition={{ duration: 3, repeat: Infinity }}
-      />
-    </motion.section>
+      {/* Static border separator (Transparent for now, but ready for theme var) */}
+      <div className="absolute inset-0 border border-transparent pointer-events-none" />
+    </section>
   );
 };
 

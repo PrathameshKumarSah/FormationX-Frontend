@@ -17,7 +17,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        // 👇 Ensuring Inter is the default sans font for Headings & Body
+        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
         display: ["Orbitron", "sans-serif"],
       },
       colors: {
@@ -30,6 +31,8 @@ module.exports = {
           DEFAULT: "hsl(var(--primary) / <alpha-value>)",
           foreground: "hsl(var(--primary-foreground) / <alpha-value>)",
           glow: "hsl(var(--primary-glow) / <alpha-value>)",
+          // 👇 Added Indigo 700 here so 'text-primary-dark' works
+          dark: "#4338ca", 
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary) / <alpha-value>)",
