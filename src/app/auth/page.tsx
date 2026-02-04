@@ -22,9 +22,6 @@ import {
 type AuthMode = "login" | "signup";
 type UserRole = "user" | "organizer";
 
-// --- NEW HELPER COMPONENT ---
-// This component's only job is to read the URL and update state.
-// It will be wrapped in Suspense.
 function AuthParamsHandler({ setMode }: { setMode: (mode: AuthMode) => void }) {
   const searchParams = useSearchParams();
 
