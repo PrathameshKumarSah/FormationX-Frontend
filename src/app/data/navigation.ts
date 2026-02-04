@@ -11,6 +11,11 @@ export const navigationData = {
       "type": "link"
     },
     {
+      "label": "Feed",
+      "href": "/feed",
+      "type": "link"
+    },
+    {
       "label": "Features",
       "href": "#",
       "type": "dropdown",
@@ -62,7 +67,12 @@ export const navigationData = {
       "label": "Contact Us",
       "href": "/contact",
       "type": "link"
-    }
+    },
+    {
+      "label": "Profile",
+      "href": "/u/me",
+      "type": "link"
+    },
   ],
   "ctaButtons": {
     "signIn": {
