@@ -100,8 +100,8 @@ export function AdvancedFilters({
         className={cn(
           'grid grid-cols-1 md:grid-cols-3 gap-4 transition-all duration-300',
           isExpanded
-            ? 'opacity-100 max-h-[500px]'
-            : 'opacity-100 max-h-[500px] md:max-h-none'
+            ? 'opacity-100 max-h-125'
+            : 'opacity-100 max-h-125 md:max-h-none'
         )}
       >
         {/* City */}

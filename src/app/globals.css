@@ -1,39 +1,40 @@
 @import "tailwindcss";
 
-/* --- 1. THEME CONFIGURATION (Tailwind v4) --- */
+/* --- 1. THEME CONFIGURATION (Light Premium - Tailwind v4) --- */
 @theme {
-  /* Colors - Mapping CSS vars to Tailwind utilities */
+  /* --- COLORS --- */
+  
+  /* BASE LAYOUT */
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
+  /* SURFACES (Cards, Modals) */
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
-
+  
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
 
-  /* EXISTING PRIMARY */
+  /* PRIMARY (Electric Indigo - Trust & Tech) */
   --color-primary: hsl(var(--primary));
-  --color-primary1: var(--primary1);
-  --color-primary-hover: var(--primary-hover);
-  --color-primary-soft: var(--primary-soft);
   --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-primary-glow: hsl(var(--primary-glow));
-  --color-primary-glow1: var(--primary-glow1);
+  
+  /* NEW: Primary Dark (Indigo 700 for Strong Text) */
+  --color-primary-dark: hsl(var(--primary-dark));
 
-  /* NEW "BRAND" COLORS (Renamed from your request) */
-  --color-brand: var(--brand);
-  --color-brand-hover: var(--brand-hover);
-  --color-brand-soft: var(--brand-soft);
-  --color-brand-glow: var(--brand-glow);
-  --color-brand-border: var(--brand-border-soft);
-
+  /* SECONDARY (Subtle Muted Interactive) */
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
 
+  /* MUTED (Text for descriptions) */
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
 
+  /* SUCCESS (For Verification Badges) */
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+
+  /* UI ELEMENTS */
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
 
@@ -44,175 +45,124 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
 
+  /* --- BORDER RADIUS --- */
+  --radius-xl: calc(var(--radius) + 4px);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  /* Animations */
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-pulse-slow: pulse 3s ease-in-out infinite;
-  --animate-gradient: gradient 8s ease infinite;
-  --animate-shimmer: shimmer 3s infinite;
-  --animate-slide-up: slide-up 0.6s ease-out forwards;
-  --animate-fade-in: fade-in 0.6s ease-out forwards;
-  --animate-scale-in: scale-in 0.5s ease-out forwards;
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  @keyframes gradient {
-    0%, 100% { background-position: left center; background-size: 200% 200%; }
-    50% { background-position: right center; background-size: 200% 200%; }
-  }
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-  @keyframes slide-up {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fade-in {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes scale-in {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
+  /* --- ANIMATIONS --- */
+  --animate-fade-in-up: fade-in-up 0.5s ease-out forwards;
+  
+  @keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 }
 
-/* --- 2. CSS VARIABLES (Cyberpunk Values + New Brand) --- */
+/* --- 2. CSS VARIABLES (Light Premium Palette) --- */
 :root {
-  --background: 222 47% 5%;
-  --foreground: 180 100% 95%;
+  /* THEME: Light Premium (Slate & Indigo) 
+     Clean, corporate, yet modern. 
+  */
 
-  --card: 222 47% 8%;
-  --card-foreground: 180 100% 95%;
+  /* Background: Slate 50 (#f8fafc) - Soft, not harsh white */
+  --background: 210 40% 98%;
+  
+  /* Foreground: Slate 900 (#0f172a) - Deep, readable text */
+  --foreground: 222.2 84% 4.9%;
 
-  --popover: 222 47% 8%;
-  --popover-foreground: 180 100% 95%;
+  /* Card: Pure White (#ffffff) */
+  --card: 0 0% 100%; 
+  --card-foreground: 222.2 84% 4.9%;
 
-  /* Existing Primary */
-  --primary: 180 100% 50%;
-  --primary1: #06b6d4;
-  --primary1-hover: #0891b2; 
-  --primary-soft: rgba(6, 182, 212, 0.15);
-  --primary-glow1: rgba(6, 182, 212, 0.35);
-  --primary-foreground: 222 47% 5%;
-  --primary-glow: 180 100% 60%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
 
-  /* NEW BRAND COLORS (From your request, renamed) */
-  --brand: #06b6d4;                 /* cyan-500 */
-  --brand-hover: #0891b2;           /* cyan-600 */
-  --brand-soft: rgba(6, 182, 212, 0.15);
-  --brand-glow: rgba(6, 182, 212, 0.35);
-  --brand-border-soft: rgba(255, 255, 255, 0.1);
+  /* PRIMARY: Electric Indigo (#4f46e5) 
+     Strong, accessible, trustworthy.
+  */
+  --primary: 249 72% 60%;
+  --primary-foreground: 210 40% 98%;
 
-  --secondary: 25 100% 55%;
-  --secondary-foreground: 222 47% 5%;
+  /* PRIMARY DARK: Indigo 700 (#4338ca) 
+     Used for strong text emphasis.
+  */
+  --primary-dark: 245 58% 51%;
+  
+  /* Secondary: Slate 100 (#f1f5f9) - For ghost buttons/backgrounds */
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
 
-  --muted: 222 30% 15%;
-  --muted-foreground: 220 15% 55%;
+  /* Muted: Slate 500 (#64748b) - Secondary text */
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
 
-  --accent: 280 80% 60%;
-  --accent-foreground: 180 100% 95%;
+  /* Accent: Slate 50 (Hover states) */
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
 
-  --destructive: 0 84% 60%;
+  /* Success: Emerald 500 (#10b981) - For "Verified" badges */
+  --success: 142.1 76.2% 36.3%;
+  --success-foreground: 355.7 100% 97.3%;
+
+  --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
 
-  --border: 222 30% 18%;
-  --input: 222 30% 15%;
-  --ring: 180 100% 50%;
-
-  --radius: 0.75rem;
-
-  /* Custom Gradients */
-  --gradient-primary: linear-gradient(135deg, hsl(180, 100%, 50%), hsl(200, 100%, 60%));
-  --gradient-secondary: linear-gradient(135deg, hsl(25, 100%, 55%), hsl(40, 100%, 60%));
-  --gradient-card: linear-gradient(135deg, hsl(222, 47%, 8%), hsl(222, 47%, 12%));
-  --gradient-hero: radial-gradient(ellipse at 50% 0%, hsl(180, 100%, 50%, 0.15) 0%, transparent 60%);
+  /* Borders: Slate 200 (#e2e8f0) - Subtle separation */
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
   
-  --shadow-glow-primary: 0 0 40px hsl(180, 100%, 50%, 0.3);
-  --shadow-glow-secondary: 0 0 40px hsl(25, 100%, 55%, 0.3);
+  /* Ring: Matching Primary */
+  --ring: 249 72% 60%;
+
+  --radius: 0.75rem; /* 12px for modern feel */
 }
 
-/* --- 3. BASE RESET --- */
+/* --- 3. UTILITIES & BASE --- */
 @layer base {
-  *, ::after, ::before {
-    box-sizing: border-box;
-    border-color: hsl(var(--border)); 
-    border-style: solid; 
-    border-width: 0;
+  * {
+    @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
   }
   
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Orbitron', sans-serif;
-  }
+  /* Typography Scale */
+  h1 { @apply text-4xl font-bold tracking-tight text-slate-900; }
+  h2 { @apply text-3xl font-semibold tracking-tight text-slate-900; }
+  h3 { @apply text-2xl font-semibold tracking-tight text-slate-900; }
+  p { @apply leading-relaxed text-slate-600; }
 }
 
-/* --- 4. UTILITIES --- */
-/* Added the requested specific utilities here */
 @layer utilities {
-  .animate-gradient {
-    background-size: 200% 200%;
-    animation: gradient 8s ease infinite;
+  /* The "Clean Glass" Effect 
+     Use: class="glass-panel"
+  */
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-lg border border-white/40 shadow-xl;
+  }
+
+  /* The "Premium Card"
+     Use: class="premium-card"
+     Adds a subtle lift on hover
+  */
+  .premium-card {
+    @apply bg-card rounded-xl border border-slate-100 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+  }
+
+  /* The "Primary Button" 
+     Use: class="btn-primary"
+  */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-primary text-white px-6 py-2.5 
+           font-medium transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
   }
   
-  .text-gradient {
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+  /* The "Badge"
+     Use: class="badge-success"
+  */
+  .badge-success {
+    @apply inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20;
   }
-}
-
-/* Custom Utilities (Tailwind v4 style) */
-@utility gradient-text {
-  @apply bg-clip-text text-transparent;
-  background-image: var(--gradient-primary);
-}
-
-@utility gradient-text-secondary {
-  @apply bg-clip-text text-transparent;
-  background-image: var(--gradient-secondary);
-}
-
-@utility glow-primary {
-  box-shadow: var(--shadow-glow-primary);
-}
-
-@utility glow-secondary {
-  box-shadow: var(--shadow-glow-secondary);
-}
-
-@utility card-gradient {
-  background-image: var(--gradient-card);
-}
-
-@utility hero-glow {
-  background-image: var(--gradient-hero);
-}
-
-/* FIX: Use standard CSS class for complex nesting to avoid parser errors */
-.neon-border {
-  position: relative;
-}
-.neon-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit; 
-  padding: 1px;
-  background: var(--gradient-primary);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
 }

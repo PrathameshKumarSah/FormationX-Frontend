@@ -56,7 +56,7 @@ export function FilterBar({
 
           {/* City Filter */}
           <Select value={selectedCity || 'all'} onValueChange={(v) => onCityChange(v === 'all' ? null : v)}>
-            <SelectTrigger className="w-[150px] bg-muted/50 border-border/50 hover:border-primary/50 transition-colors">
+            <SelectTrigger className="w-37.5 bg-muted/50 border-border/50 hover:border-primary/50 transition-colors">
               <SelectValue placeholder="City" />
             </SelectTrigger>
             <SelectContent className="bg-popover border-border z-50">
@@ -69,7 +69,7 @@ export function FilterBar({
 
           {/* Area Filter */}
           <Select value={selectedArea || 'all'} onValueChange={(v) => onAreaChange(v === 'all' ? null : v)}>
-            <SelectTrigger className="w-[180px] bg-muted/50 border-border/50 hover:border-primary/50 transition-colors">
+            <SelectTrigger className="w-45 bg-muted/50 border-border/50 hover:border-primary/50 transition-colors">
               <SelectValue placeholder="Area" />
             </SelectTrigger>
             <SelectContent className="bg-popover border-border z-50">
@@ -82,7 +82,7 @@ export function FilterBar({
 
           {/* Tier Filter */}
           <Select value={selectedTier || 'all'} onValueChange={(v) => onTierChange(v === 'all' ? null : v as SponsorTier)}>
-            <SelectTrigger className="w-[140px] bg-muted/50 border-border/50 hover:border-primary/50 transition-colors">
+            <SelectTrigger className="w-35 bg-muted/50 border-border/50 hover:border-primary/50 transition-colors">
               <SelectValue placeholder="Tier" />
             </SelectTrigger>
             <SelectContent className="bg-popover border-border z-50">
